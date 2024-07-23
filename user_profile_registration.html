@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザープロフィール登録</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>スポーツクラブNas</h1>
+        <button class="home-button" onclick="location.href='index.html'">ホームへ戻る</button>
+    </header>
+
+    <div class="container">
+        <h2>ユーザープロフィール登録</h2>
+        <form id="registrationForm" onsubmit="return showConfirmation(event)">
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="age">年齢</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="gender">性別</label>
+            <select id="gender" name="gender" required>
+                <option value="male">男性</option>
+                <option value="female">女性</option>
+                <option value="other">その他</option>
+            </select>
+
+            <label for="height">身長 (cm)</label>
+            <input type="number" id="height" name="height" required>
+
+            <label for="weight">体重 (kg)</label>
+            <input type="number" id="weight" name="weight" required>
+
+            <label for="bodyFat">体脂肪率 (%)</label>
+            <input type="number" id="bodyFat" name="bodyFat" required>
+
+            <label for="muscleMass">筋肉量 (kg)</label>
+            <input type="number" id="muscleMass" name="muscleMass" required>
+
+            <label for="allergies">アレルギー</label>
+            <textarea id="allergies" name="allergies" rows="3"></textarea>
+
+            <label for="goal">目標となるどのような体になりたいか</label>
+            <textarea id="goal" name="goal" rows="3" required></textarea>
+
+            <button type="submit">確認</button>
+        </form>
+    </div>
+
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">ここを押すと色が変わるよ！</button>
+
+    <script>
+        function showConfirmation(event) {
+            event.preventDefault(); // フォームのデフォルト送信を防止
+
+            // 入力されたデータを取得
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const bodyFat = document.getElementById('bodyFat').value;
+            const muscleMass = document.getElementById('muscleMass').value;
+            const allergies = document.getElementById('allergies').value;
+            const goal = document.getElementById('goal').value;
+
+            // 確認ページを生成
+            const confirmationHtml = `
+                <header>
+                    <h1>スポーツクラブNas</h1>
+                    <button class="home-button" onclick="location.href='index.html'">ホームへ戻る</button>
+                </header>
+                <div class="container">
+                    <h2>登録確認</h2>
+                    <div>
+                        <p>名前: ${name}</p>
+                        <p>年齢: ${age}</p>
+                        <p>性別: ${gender}</p>
+                        <p>身長: ${height} cm</p>
+                        <p>体重: ${weight} kg</p>
+                        <p>体脂肪率: ${bodyFat} %</p>
+                        <p>筋肉量: ${muscleMass} kg</p>
+                        <p>アレルギー: ${allergies}</p>
+                        <p>目標: ${goal}</p>
+                    </div>
+                    <p>この情報で登録しますか？</p>
+                    <button onclick="registerUser()">はい</button>
+                    <button onclick="goBack()">いいえ</button>
+                </div>
+            `;
+
+            document.body.innerHTML = confirmationHtml;
+
+            const darkModeButton = document.createElement('button');
+            darkModeButton.textContent = 'ダークモード';
+            darkModeButton.classList.add('dark-mode-toggle');
+            darkModeButton.addEventListener('click', toggleDarkMode);
+
+            document.body.appendChild(darkModeButton);
+        }
+
+        function registerUser() {
+            alert("登録しました。");
+            window.location.href = "index.html"; // ホームページにリダイレクト
+        }
+
+        function goBack() {
+            window.history.back(); // 前のページに戻る
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('header').classList.toggle('dark-mode');
+            document.querySelector('.container').classList.toggle('dark-mode');
+            document.querySelectorAll('ul li').forEach(li => li.classList.toggle('dark-mode'));
+            document.querySelectorAll('.menu-button').forEach(button => button.classList.toggle('dark-mode'));
+            document.querySelectorAll('button').forEach(button => button.classList.toggle('dark-mode'));
+            document.querySelector('.menu-content').classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
