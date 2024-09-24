@@ -197,4 +197,24 @@
 
             // アドバイスの表示
             document.getElementById('advice').textContent = advice;
+             });
+
+        // レシピに関する質問の処理
+        document.getElementById('askQuestion').addEventListener('click', async function() {
+            const question = document.getElementById('recipeQuestion').value;
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value;
+
+            // プロンプトを作成してChatGPTに送信
+            const questionPrompt = `${name}さんは${age}歳、体重${weight}kg、身長${height}cmです。次のレシピについて質問があります: ${question}`;
+            const gptResponse = await getChatGPTResponse(questionPrompt);
+
+            // ChatGPTの回答を表示
+            document.getElementById('gptAnswer').textContent = gptResponse;
+        });
+    </script>
+</body>
+</html>
        
