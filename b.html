@@ -13,9 +13,6 @@
             display: block;
             margin-top: 10px;
         }
-        .history-item {
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
@@ -62,11 +59,15 @@
 
         <h3>個別アドバイス</h3>
         <p id="advice"></p>
-    </div>
 
-    <!-- 履歴セクション -->
-    <h2>履歴</h2>
-    <div id="history"></div>
+        <!-- レシピに関する質問フォーム -->
+        <h3>レシピに関する質問</h3>
+        <textarea id="recipeQuestion" rows="4" cols="50" placeholder="レシピに関して質問があれば入力してください"></textarea><br>
+        <button id="askQuestion">質問する</button>
+
+        <h4>ChatGPTの回答</h4>
+        <p id="gptAnswer"></p>
+    </div>
 
     <script>
         const apiKey = 'YOUR_OPENAI_API_KEY'; // ここにOpenAIのAPIキーを入力
@@ -90,48 +91,8 @@
 
         // レシピ提案の関数
         function suggestRecipes(dailyCalories) {
-            return recipes.filter(recipe => recipe.calories <= dailyCalories / 3);
-        }
-
-        // 履歴を保存する関数
-        function saveToHistory(date, dailyCalories, suggestedRecipes) {
-            const history = JSON.parse(localStorage.getItem('healthHistory')) || [];
-            history.push({
-                date,
-                dailyCalories,
-                recipes: suggestedRecipes
-            });
-            localStorage.setItem('healthHistory', JSON.stringify(history));
-        }
-
-        // 履歴を表示する関数
-        function displayHistory() {
-            const history = JSON.parse(localStorage.getItem('healthHistory')) || [];
-            const historyContainer = document.getElementById('history');
-            historyContainer.innerHTML = ''; // 既存の履歴をクリア
-
-            history.forEach(entry => {
-                const historyItem = document.createElement('div');
-                historyItem.classList.add('history-item');
-
-                const dateElement = document.createElement('p');
-                dateElement.textContent = `日付: ${entry.date}`;
-                historyItem.appendChild(dateElement);
-
-                const caloriesElement = document.createElement('p');
-                caloriesElement.textContent = `1日の推定消費カロリー: ${entry.dailyCalories.toFixed(2)} kcal`;
-                historyItem.appendChild(caloriesElement);
-
-                const recipeListElement = document.createElement('ul');
-                entry.recipes.forEach(recipe => {
-                    const recipeItem = document.createElement('li');
-                    recipeItem.textContent = `${recipe.name} - カロリー: ${recipe.calories} kcal`;
-                    recipeListElement.appendChild(recipeItem);
-                });
-                historyItem.appendChild(recipeListElement);
-
-                historyContainer.appendChild(historyItem);
-            });
+            const suggestedRecipes = recipes.filter(recipe => recipe.calories <= dailyCalories / 3);
+            return suggestedRecipes;
         }
 
         // ChatGPT API呼び出し関数
@@ -166,7 +127,7 @@
 
             // BMR計算
             const bmr = calculateBMR(gender, weight, height, age);
-            const dailyCalories = bmr * activityLevel;
+            const dailyCalories = bmr * activityLevel; // 選択された活動レベルで消費カロリーを計算
 
             // 結果を表示
             document.getElementById('resultTitle').style.display = 'block';
@@ -184,20 +145,13 @@
                 recipeList.appendChild(listItem);
             });
 
-            // 日時を取得して履歴に保存
-            const now = new Date().toLocaleString();
-            saveToHistory(now, dailyCalories, suggestedRecipes);
-
-            // 履歴を更新して表示
-            displayHistory();
-
             // ChatGPTからアドバイスを取得
             const advicePrompt = `${name}さんは${age}歳、性別は${gender === 'male' ? '男性' : '女性'}、体重は${weight}kg、身長は${height}cm、活動レベルは${activityLevel}です。健康に関するアドバイスを提供してください。`;
             const advice = await getChatGPTResponse(advicePrompt);
 
             // アドバイスの表示
             document.getElementById('advice').textContent = advice;
-             });
+        });
 
         // レシピに関する質問の処理
         document.getElementById('askQuestion').addEventListener('click', async function() {
@@ -217,4 +171,3 @@
     </script>
 </body>
 </html>
-       
