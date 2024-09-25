@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スポーツクラブNAS</title>
+    <title>ホーム - スポーツクラブNAS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="root"></div>
-    <script src="%PUBLIC_URL%/bundle.js"></script>
+    <header>
+        <h1>スポーツクラブNAS</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li> <!-- ホームへのリンク -->
+                <li><a href="login.html">ログイン</a></li>
+                <li><a href="register.html">登録</a></li>
+                <li><a href="recipes.html">レシピ</a></li>
+                <li><a href="profile.html">ユーザープロフィール</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>スポーツクラブNASへようこそ！</h2>
+        <button onclick="location.href='register.html'">今すぐ登録</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 スポーツクラブNAS. All rights reserved.</p>
+    </footer>
 </body>
 </html>
