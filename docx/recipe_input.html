@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レシピ提案入力</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .recommendation-button {
+            font-size: 40px; /* フォントサイズを大きく */
+            padding: 10px 20px; /* ボタンの内側の余白を設定 */
+            margin-bottom: 20px; /* ボタンの下に余白を追加 */
+            background-color: #4CAF50; /* 背景色 */
+            color: white; /* 文字色 */
+            border: none; /* ボーダーをなしに */
+            cursor: pointer; /* カーソルをポインターに */
+            border-radius: 5px; /* 角を丸く */
+        }
+
+        .recommendation-button:hover {
+            background-color: #45a049; /* ホバー時の色 */
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>スポーツクラブNas</h1>
+        <button class="home-button" onclick="location.href='index.html'">ホームへ戻る</button>
+    </header>
+
+    <div class="container">
+        <h2>レシピ名入力</h2>
+        <input type="text" id="recipeName" name="recipeName" required placeholder="レシピ名を入力してください">
+
+        <h2>食材入力</h2>
+        <form id="recipeForm" action="recipe_suggestion.html" method="post">
+            <h3>現在ある食材</h3>
+            <label><input type="checkbox" name="ingredients" value="鶏肉"> 鶏肉</label>
+            <label><input type="checkbox" name="ingredients" value="牛肉"> 牛肉</label>
+            <label><input type="checkbox" name="ingredients" value="魚"> 魚</label>
+            <label><input type="checkbox" name="ingredients" value="野菜"> 野菜</label>
+            <label><input type="checkbox" name="ingredients" value="卵"> 卵</label>
+            <label><input type="checkbox" name="ingredients" value="豆腐"> 豆腐</label>
+            <label><input type="checkbox" name="ingredients" value="豚肉"> 豚肉</label>
+            <label><input type="checkbox" name="ingredients" value="エビ"> エビ</label>
+            <label><input type="checkbox" name="ingredients" value="カニ"> カニ</label>
+            <label><input type="checkbox" name="ingredients" value="トマト"> トマト</label>
+            <label><input type="checkbox" name="ingredients" value="アスパラガス"> アスパラガス</label>
+            <label><input type="checkbox" name="ingredients" value="じゃがいも"> じゃがいも</label>
+            <label><input type="checkbox" name="ingredients" value="にんじん"> にんじん</label>
+            <label><input type="checkbox" name="ingredients" value="玉ねぎ"> 玉ねぎ</label>
+            <label><input type="checkbox" name="ingredients" value="しいたけ"> しいたけ</label>
+            <label><input type="checkbox" name="ingredients" value="ブロッコリー"> ブロッコリー</label>
+            <label><input type="checkbox" name="ingredients" value="ニラ"> ニラ</label>
+            <label><input type="checkbox" name="ingredients" value="セロリ"> セロリ</label>
+            <label><input type="checkbox" name="ingredients" value="パプリカ"> パプリカ</label>
+            <label><input type="checkbox" name="ingredients" value="ほうれん草"> ほうれん草</label>
+            <label><input type="checkbox" name="ingredients" value="カボチャ"> カボチャ</label>
+            <label><input type="checkbox" name="ingredients" value="納豆"> 納豆</label>
+            <label><input type="checkbox" name="ingredients" value="ヨーグルト"> ヨーグルト</label>
+            <label><input type="checkbox" name="ingredients" value="きゅうり"> きゅうり</label>
+            <label><input type="checkbox" name="ingredients" value="キャベツ"> キャベツ</label>
+            <label><input type="checkbox" name="ingredients" value="さつまいも"> さつまいも</label>
+            <label><input type="checkbox" name="ingredients" value="大豆"> 大豆</label>
+
+            <h3>今日取った食事とその分量</h3>
+            <textarea id="meal" name="meal" rows="3" required placeholder="例: 鶏肉 150g, サラダ 100g"></textarea>
+            
+            <h3>摂取したい特定の栄養素</h3>
+            <input type="text" id="nutrient" name="nutrient" required placeholder="例: タンパク質, ビタミンC">
+
+            <h3>検索結果</h3>
+            <div id="searchResults" style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+                検索結果はここに表示されます。
+            </div>
+
+            <h3>摂取したい特定の栄養素</h3>
+            <input type="text" id="nutrient" name="nutrient" required placeholder="例: タンパク質, ビタミンC">
+
+            <button type="submit">レシピ提案</button>
+        </form>
+    </div>
+</body>
+</html>

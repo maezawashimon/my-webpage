@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おすすめの料理</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff7f7f; /* 優しい赤 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #ff4d4d; /* ホバー時の色 */
+        }
+
+        .select-menu-button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px; /* ボタンの間隔を開ける */
+            background-color: #7fbfff; /* 優しい青 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .select-menu-button:hover {
+            background-color: #5ca8db; /* ホバー時の色 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>おすすめの料理</h1>
+        <button class="home-button" onclick="location.href='index.html'">ホームへ戻る</button>
+    </header>
+
+    <div class="container">
+        <h2>おすすめの料理一覧</h2>
+        <form id="recipeSelection">
+            <ul>
+                <li><label><input type="checkbox" name="recipe" value="鶏肉と野菜の炒め物"> 鶏肉と野菜の炒め物</label></li>
+                <li><label><input type="checkbox" name="recipe" value="牛肉のすき焼き"> 牛肉のすき焼き</label></li>
+                <li><label><input type="checkbox" name="recipe" value="魚のグリル"> 魚のグリル</label></li>
+                <li><label><input type="checkbox" name="recipe" value="豆腐の味噌汁"> 豆腐の味噌汁</label></li>
+                <li><label><input type="checkbox" name="recipe" value="エビとアスパラの炒め物"> エビとアスパラの炒め物</label></li>
+                <li><label><input type="checkbox" name="recipe" value="カボチャの煮物"> カボチャの煮物</label></li>
+                <li><label><input type="checkbox" name="recipe" value="ほうれん草のサラダ"> ほうれん草のサラダ</label></li>
+                <li><label><input type="checkbox" name="recipe" value="納豆ご飯"> 納豆ご飯</label></li>
+                <li><label><input type="checkbox" name="recipe" value="トマトと玉ねぎのサラダ"> トマトと玉ねぎのサラダ</label></li>
+                <li><label><input type="checkbox" name="recipe" value="パプリカのオーブン焼き"> パプリカのオーブン焼き</label></li>
+            </ul>
+            <button type="button" class="submit-button" onclick="location.href='recipe_suggestion.html'">送信</button>
+            <button type="button" class="select-menu-button" onclick="location.href='recipe_input.html'">自分でメニューを選択</button>
+        </form>
+
+        <h3>注意事項</h3>
+        <p>本日のおすすめ料理で提案されたレシピ以外を選択すると目標としている体に必要な栄養素が不足する場合があります。</p>
+    </div>
+</body>
+</html>

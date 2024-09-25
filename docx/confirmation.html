@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登録確認</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>登録確認</h1>
+        <div id="confirmationDetails"></div>
+        <p>この情報で登録しますか？</p>
+        <form id="confirmForm" action="index.html" method="post">
+            <input type="hidden" id="confirmData" name="confirmData">
+            <button type="submit">はい</button>
+            <button type="button" id="editButton">いいえ</button>
+        </form>
+    </div>
+    <script>
+        // URLSearchParamsからデータを取得して表示
+        const params = new URLSearchParams(window.location.search);
+        const detailsDiv = document.getElementById('confirmationDetails');
+        let confirmData = {};
+        
+        params.forEach((value, key) => {
+            const p = document.createElement('p');
+            p.textContent = `${key}: ${value}`;
+            detailsDiv.appendChild(p);
+            confirmData[key] = value;
+        });
+
+        // 確認データをhidden inputにセット
+        document.getElementById('confirmData').value = JSON.stringify(confirmData);
+
+        // "いいえ"ボタンのクリックイベント
+        document.getElementById('editButton').onclick = () => {
+            window.history.back();
+        };
+    </script>
+</body>
+</html>

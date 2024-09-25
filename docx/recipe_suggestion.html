@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レシピ提案</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>レシピ提案</h1>
+        <div id="suggestedRecipes"></div>
+    </div>
+
+    <script>
+        // URLSearchParamsからデータを取得
+        const params = new URLSearchParams(window.location.search);
+        const selectedIngredients = params.getAll('ingredients');
+        const meal = params.get('meal');
+        const nutrient = params.get('nutrient');
+
+        // ダミーレシピデータ
+        const recipes = [
+            {
+                name: "鶏肉のソテー",
+                ingredients: "鶏肉 200g, 塩, 胡椒, オリーブオイル",
+                instructions: "鶏肉に塩と胡椒を振り、オリーブオイルで焼く。",
+                nutrients: "タンパク質, ビタミンB6",
+                advice: "野菜を添えると栄養バランスが良くなります。"
+            },
+            {
+                name: "野菜炒め",
+                ingredients: "野菜 300g, 鶏肉 100g, 醤油, ごま油",
+                instructions: "鍋で材料を炒め、醤油で味付けする。",
+                nutrients: "ビタミンA, 食物繊維",
+                advice: "様々な色の野菜を使いましょう。"
+            }
+        ];
+
+        // レシピ提案のフィルタリング
+        const suggestedRecipes = recipes.filter(recipe =>
+            selectedIngredients.some(ing => recipe.ingredients.includes(ing))
+        );
+
+        // 提案結果を表示
+        let recipeHtml = "<h2>提案されたレシピ</h2>";
+
+        if (suggestedRecipes.length > 0) {
+            suggestedRecipes.forEach(recipe => {
+                recipeHtml += `
+                    <h3>${recipe.name}</h3>
+                    <p><strong>必要な材料:</strong> ${recipe.ingredients}</p>
+                    <p><strong>作り方:</strong> ${recipe.instructions}</p>
+                    <p><strong>摂取できる栄養素:</strong> ${recipe.nutrients}</p>
+                    <p><strong>アドバイス:</strong> ${recipe.advice}</p>
+                    <hr>
+                `;
+            });
+        } else {
+            recipeHtml += "<p>ここにレシピ、指導内容の表示</p>";
+        }
+
+        document.getElementById('suggestedRecipes').innerHTML = recipeHtml;
+    </script>
+</body>
+</html>
