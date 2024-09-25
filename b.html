@@ -70,7 +70,8 @@
     </div>
 
     <script>
-        const apiKey = 'sk-c2Yx-V9UJ7Od0jNEOm3FkfcbG8zPAa4QbwWDcMp2ecT3BlbkFJy3ioaxLsiVNhdZi0av1FeGUS7UhnoNBQ2aXaAY7I4A'; // ここにOpenAIのAPIキーを入力
+        // APIキーを定義
+        const apiKey = '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'; // ここに正しいAPIキーを入力
 
         // 簡易レシピデータベース
         const recipes = [
@@ -97,49 +98,31 @@
 
         // ChatGPT API呼び出し関数
         async function getChatGPTResponse(prompt) {
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sk-c2Yx-V9UJ7Od0jNEOm3FkfcbG8zPAa4QbwWDcMp2ecT3BlbkFJy3ioaxLsiVNhdZi0av1FeGUS7UhnoNBQ2aXaAY7I4A}`
-                },
-                body: JSON.stringify({
-                    model: "gpt-3.5-turbo",
-                    messages: [{"role": "user", "content": prompt}],
-                    max_tokens: 150
-                })
-            });
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${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}` // ここで正しいAPIキーを使用
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo",
+                        messages: [{"role": "user", "content": prompt}],
+                        max_tokens: 150
+                    })
+                });
 
-            const data = await response.json();
-            return data.choices[0].message.content;
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.choices[0].message.content;
+            } catch (error) {
+                console.error("APIリクエストに失敗しました:", error);
+                return "APIリクエストに失敗しました。再試行してください。";
+            }
         }
-
-        async function getChatGPTResponse(prompt) {
-    try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${sk-c2Yx-V9UJ7Od0jNEOm3FkfcbG8zPAa4QbwWDcMp2ecT3BlbkFJy3ioaxLsiVNhdZi0av1FeGUS7UhnoNBQ2aXaAY7I4A}`
-            },
-            body: JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: [{"role": "user", "content": prompt}],
-                max_tokens: 1500
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data.choices[0].message.content;
-    } catch (error) {
-        console.error("APIリクエストに失敗しました:", error);
-        return "APIリクエストに失敗しました。再試行してください。";
-    }
-}
 
         // フォーム送信時の処理
         document.getElementById('healthForm').addEventListener('submit', async function(event) {
